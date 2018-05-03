@@ -2,7 +2,8 @@ var questionsArr = [
     {
         question: "Which of these star soccer players has never played for Real Madrid?",
         answers: ["David Beckham", "Zinedine Zidane", "Ronaldo", "Robinho"],
-        correctAns: "Robinho"
+        correctAns: "Robinho",
+        name: "q1"
 
     },
     {
@@ -11,30 +12,44 @@ var questionsArr = [
         correctAns: "Liverpool"
 
     }
-    //create a function for the timer and use set interval
-
+   
 ]
+
+function decrement(){
+    timer--;
+    if (timer<=0){
+        clearInterval(interval)
+       
+    }
+    $("#timer").text(timer)
+}
+ //create a function for the timer and use set interval
+    function timerCountDown(){
+        timer =setInterval()
+        
+    }
 var timer = 30
 // var questionCounter= 0
 function displayQuestion() {
-    $("#timer").text(timer)
+
     for (var i = 0; i < questionsArr.length; i++) {
         $("#question-div").append("<h3 class= 'question' > " + questionsArr[i].question + "</h3>")
         for (var j = 0; j < questionsArr[i].answers.length; j++) {
-            $("#question-div").append("<input type='radio' name='optradio' id='radioButton'>" + questionsArr[i].answers[j] )
+            $("#question-div").append("<input type='radio' name=" + questionsArr[i].name + " id='radioButton'>" + questionsArr[i].answers[j] )
 // change the answer div to radio input div
         }
 
 
     } // call your timer function
 }
-
+var interval;
 $(document).ready(function () {
     $("#timer-div").hide()
     $("#start-btn").on('click', function () {
+        interval = setInterval(decrement, 1000)
         $("#timer-div").show()
         $("#start-btn").hide()
         displayQuestion()
-
+        
     })
 })
