@@ -12,36 +12,65 @@ var questionsArr = [
         correctAns: "Liverpool"
 
     }
-   
-]
 
-function decrement(){
+]
+function correctAnswers() {
+    $
+}
+var correct = 0;
+var incorrect=0;
+var Robinho = questionsArr[0].correctAns
+function decrement() {
     timer--;
-    if (timer<=0){
-        clearInterval(interval)
+    if (timer <= 0) {
        
+        clearInterval(interval)
+        setTimeout(function(){
+            $("#main-content").empty();
+            console.log(Robinho)
+           if (questionsArr[0]===Robinho){
+               correct++
+               console.log("hello")
+           }else {
+               incorrect++
+               console.log("goodbye")
+           };
+        //    if (questionsArr[1]==="Liverpool"){
+        //     correct++
+            
+        // }else {
+        //     incorrect++
+        // };
+        $("#main-content").append("<h3>Correct Answers: " + correct + "</h3>")
+            $("#main-content").append("<h3>Incorrect Answers: " + incorrect + "</h3>")
+        }, 1000 )
+
+
     }
     $("#timer").text(timer)
 }
- //create a function for the timer and use set interval
-    function timerCountDown(){
-        timer =setInterval()
-        
-    }
-var timer = 30
+//create a function for the timer and use set interval
+function timerCountDown() {
+    timer = setInterval()
+
+}
+var timer = 5
 // var questionCounter= 0
 function displayQuestion() {
 
     for (var i = 0; i < questionsArr.length; i++) {
-        $("#question-div").append("<h3 class= 'question' > " + questionsArr[i].question + "</h3>")
+        $("#question-div").append("<h3 class= 'question' > " + questionsArr[i].question + "</h3>");
+
         for (var j = 0; j < questionsArr[i].answers.length; j++) {
-            $("#question-div").append("<input type='radio' name=" + questionsArr[i].name + " id='radioButton'>" + questionsArr[i].answers[j] )
-// change the answer div to radio input div
+            $("#question-div").append("<input type='radio' name=" + questionsArr[i].name + " class='radioButton' value= "+ questionsArr[i].answers[j] + ">" + questionsArr[i].answers[j])
+
+            // change the answer div to radio input div
         }
+    }
 
-
-    } // call your timer function
 }
+// call your timer function
+
 var interval;
 $(document).ready(function () {
     $("#timer-div").hide()
@@ -50,6 +79,10 @@ $(document).ready(function () {
         $("#timer-div").show()
         $("#start-btn").hide()
         displayQuestion()
-        
+    
+    
+    
+
     })
-})
+
+}) 
