@@ -19,7 +19,7 @@ function correctAnswers() {
 }
 var correct = 0;
 var incorrect=0;
-var Robinho = questionsArr[0].correctAns
+var Robinho = questionsArr[0].correctAns;
 function decrement() {
     timer--;
     if (timer <= 0) {
@@ -28,21 +28,21 @@ function decrement() {
         setTimeout(function(){
             $("#main-content").empty();
             console.log(Robinho)
-           if (questionsArr[0]===Robinho){
+           if (questionsArr[0].question===Robinho){
                correct++
                console.log("hello")
            }else {
                incorrect++
                console.log("goodbye")
            };
-        //    if (questionsArr[1]==="Liverpool"){
+        //    if (questionsArr[1].correctAns==="Liverpool"){
         //     correct++
             
         // }else {
         //     incorrect++
         // };
         $("#main-content").append("<h3>Correct Answers: " + correct + "</h3>")
-            $("#main-content").append("<h3>Incorrect Answers: " + incorrect + "</h3>")
+        $("#main-content").append("<h3>Incorrect Answers: " + incorrect + "</h3>")
         }, 1000 )
 
 
