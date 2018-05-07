@@ -14,47 +14,56 @@ var questionsArr = [
     }
 
 ]
-function correctAnswers() {
-    $
-}
+var userAnswer1,userAnswer2;
+
 var correct = 0;
-var incorrect=0;
+var incorrect = 0;
 var Robinho = questionsArr[0].correctAns;
+
+
 function decrement() {
     timer--;
     if (timer <= 0) {
-       
+
         clearInterval(interval)
-        setTimeout(function(){
-            $("#main-content").empty();
+        setTimeout(function () {
+           
             console.log(Robinho)
-           if (questionsArr[0].question===Robinho){
-               correct++
-               console.log("hello")
-           }else {
-               incorrect++
-               console.log("goodbye")
-           };
-        //    if (questionsArr[1].correctAns==="Liverpool"){
-        //     correct++
-            
-        // }else {
-        //     incorrect++
-        // };
-        $("#main-content").append("<h3>Correct Answers: " + correct + "</h3>")
-        $("#main-content").append("<h3>Incorrect Answers: " + incorrect + "</h3>")
-        }, 1000 )
+
+    
+            endGame()
+        }, 1000)
 
 
     }
     $("#timer").text(timer)
+}
+function endGame() {
+    clearInterval(interval)
+    if (userAnswer1== questionsArr[0].correctAns){
+        correct++
+    } else if(userAnswer1 != questionsArr[0].correctAns ){
+        incorrect++
+    }
+    if (userAnswer2== questionsArr[1].correctAns){
+        correct++
+    } else if(userAnswer2 != questionsArr[1].correctAns ){
+        incorrect++
+    }
+
+    $("#question-div").hide();
+    $("#timer-div").hide()
+    $(".trivia-submit").hide()
+
+    $("#main-content").append("<h3>Correct Answers: " + correct + "</h3>")
+    $("#main-content").append("<h3>Incorrect Answers: " + incorrect + "</h3>")
 }
 //create a function for the timer and use set interval
 function timerCountDown() {
     timer = setInterval()
 
 }
-var timer = 5
+var timer = 15
 // var questionCounter= 0
 function displayQuestion() {
 
@@ -62,7 +71,7 @@ function displayQuestion() {
         $("#question-div").append("<h3 class= 'question' > " + questionsArr[i].question + "</h3>");
 
         for (var j = 0; j < questionsArr[i].answers.length; j++) {
-            $("#question-div").append("<input type='radio' name=" + questionsArr[i].name + " class='radioButton' value= "+ questionsArr[i].answers[j] + ">" + questionsArr[i].answers[j])
+            $("#question-div").append("<input type='radio' name=" + questionsArr[i].name + " class='radioButton" + i + "' value='" + questionsArr[i].answers[j] + "'>" + questionsArr[i].answers[j])
 
             // change the answer div to radio input div
         }
@@ -73,16 +82,27 @@ function displayQuestion() {
 
 var interval;
 $(document).ready(function () {
+    $(".trivia-submit").hide()
     $("#timer-div").hide()
     $("#start-btn").on('click', function () {
         interval = setInterval(decrement, 1000)
+        $(".trivia-submit").show()
         $("#timer-div").show()
         $("#start-btn").hide()
         displayQuestion()
-    
-    
-    
-
     })
 
 }) 
+$(document).on("click", ".trivia-submit", function(){
+    // This grabs the value of the checked radio buttons
+     userAnswer1 = $(".radioButton0:checked").val();
+     userAnswer2 = $(".radioButton1:checked").val()
+    console.log(userAnswer1)
+    console.log(userAnswer2)
+    
+   
+
+    endGame()
+    //Give each question's radio buttons a different class
+    //if userAnswer === questionsArr[i].correctAns, increment their score. If it doesn't, increment incorrect answers
+})
